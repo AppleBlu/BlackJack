@@ -161,6 +161,7 @@ def application_beginning():
                 # Showing the user their chip total
                 type_fast(f'You now have {user1.chips} chips\n')
                 # Running the application again
+                user1.reset_total(0)
                 application()
 
 
