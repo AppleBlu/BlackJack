@@ -16,6 +16,7 @@ dealers_cards = []
 
 # Function to type print statements letter by letter
 def type_fast(string):
+    """Types char by char instead of all at once like a print statement"""
     for letter in string:
         print(letter, end='')
         sys.stdout.flush()
@@ -25,6 +26,7 @@ def type_fast(string):
 
 # Function to retrieve a random dict key from a pack of cards (a random card)
 def get_one_card():
+    """return a random dict key from dict cards and then pop the value from dict cards"""
     # Getting the random card
     card = random.choice(list(cards))
     # Removing that card from the pack of cards
@@ -35,6 +37,7 @@ def get_one_card():
 
 # Function to get the dealers card value total
 def get_dealers_total():
+    """Returns the dealers total"""
     total = 0
     # Iterating through dealers cards and adding the value of that card (which it finds in the dictionary) and adds
     # it to the total
@@ -45,6 +48,7 @@ def get_dealers_total():
 
 # Function to give the dealer two random cards from a pack of cards (two dict keys)
 def give_dealer_first_cards():
+    """Adds two random keys (cards) from the dict cards to dealers cards and removes them from the dict cards"""
     # Retrieving card 1
     card1 = get_one_card()
     # Adding it to dealers_cards
@@ -57,6 +61,7 @@ def give_dealer_first_cards():
 
 # Function to make the dealer hit if his card value total is less than 15
 def dealers_play():
+    """Adds more random keys (cards) from dict cards until the dealers total is more than 15"""
     # Making the list dealers_cards accessible in the function using global
     global dealers_cards
     # Setting the dealers_cards list to empty
@@ -71,6 +76,8 @@ def dealers_play():
 
 # Function to ask the user how much they would like to bet in chips
 def bet_chips():
+    """Asks the user how many chips they would like to bet and if they enter more than they have it will ask them to
+    renter. Returns the users input as an int"""
     # Asking the user to input the amount of chips they would like to bet for this round
     chip_bet = int(input('How many chips would you like to bet? \nChips: '))
     # Using a while loop to check the user did not enter an amount more than they have
@@ -84,6 +91,7 @@ def bet_chips():
 
 # Function to check if the users card value total is equal to 21
 def blackjack_check():
+    """Checks if users total is exactly 21"""
     if user1.total == 21:
         type_fast('BLACKJACK!!! You win')
         # Updating users chips to be there original chips plus what they bet
@@ -96,6 +104,7 @@ def blackjack_check():
 
 # Function to check if the users cards value total is over 21
 def bust_check():
+    """Checks if users total is over 21"""
     if user1.total > 21:
         type_fast('You bust')
         # Updating users chips to be there original chips minus what they bet
@@ -108,6 +117,7 @@ def bust_check():
 
 # Function that asks the user if they would like to hit or stick
 def dealers_question(turns):
+    """Asks the user if they would like to hit or stick and returns the users answer"""
     # Asking the user if they would like to hit or stick
     type_fast('\nWould you like to hit or stick?')
 
@@ -130,6 +140,7 @@ def dealers_question(turns):
 
 # Function to create the beginning of the application
 def application_beginning():
+    """Runs the first part of the application"""
 
     # Checking if the user hit 21 with there first two cards
     if blackjack_check():
@@ -155,6 +166,9 @@ def application_beginning():
 
 # Function to make action on the input of the dealers question (hit or stick?)
 def hit(user_cards, turns, user_chips, user_bet_chips, user_total):
+    """If the user has entered 'h' to the dealers question this function will add a random card/key from dict cards
+    to the users cards and display the users cards including the total value of their cards. Else if the user entered
+    's' it will check who won out of the dealer and user and print a display showing who won"""
 
     # Using an if statement to add a random card to users_cards if they entered "h" for hit
     if dealers_question(turns) == 'h':
@@ -239,7 +253,7 @@ def hit(user_cards, turns, user_chips, user_bet_chips, user_total):
 # Creating a class user to hold users data and methods to update the data
 class User:
 
-    # Creating an initialising method to hold user variable
+    # Creating an initializing method to hold user variable
     def __init__(self, chips):
         self.users_cards = []
         self.total = 0
@@ -285,7 +299,7 @@ class User:
         type_fast(f'That brings you to {self.total}')
 
 
-# Initialising a User class
+# Initializing a User class
 user1 = User(100)
 # Giving the dealer his first cards
 give_dealer_first_cards()
@@ -293,6 +307,7 @@ give_dealer_first_cards()
 
 # Function That holds the other function to be called to create the application as a whole
 def application():
+    """Runs the main application with all the necessary functions"""
     global cards
     # Making sure the total is rest each round
     user1.reset_total(0)
